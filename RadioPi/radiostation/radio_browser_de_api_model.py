@@ -93,17 +93,17 @@ class RadioBrowserDeClient:
 
     def find_stations_by(self, category, name):
         return self.request_and_map(
-            "http://www.radio-browser.info/webservice/json/stations/by%s/%s" % (category, name), 
+            "http://all.api.radio-browser.info/webservice/json/stations/by%s/%s" % (category, name), 
             self.mapper.as_station)
 
     def find_stations_by_topvote(self, rows):
         if (not rows):            
             return self.request_and_map(
-                "http://www.radio-browser.info/webservice/json/stations/topvote", 
+                "http://all.api.radio-browser.info/webservice/json/stations/topvote", 
                 self.mapper.as_station)
         else:
             return self.request_and_map(
-                "http://www.radio-browser.info/webservice/json/stations/topvote/%s" % rows, 
+                "http://all.api.radio-browser.info/webservice/json/stations/topvote/%s" % rows, 
                 self.mapper.as_station)
 
     def get_countries(self, filter_string):
@@ -121,16 +121,16 @@ class RadioBrowserDeClient:
     def get_list_of_item(self, category, filter_string): 
         if (filter_string):
             return self.request_and_map(
-                "http://www.radio-browser.info/webservice/json/%s/%s" % (category, filter_string),
+                "http://all.api.radio-browser.info/webservice/json/%s/%s" % (category, filter_string),
                 self.mapper.as_list_of_item)
         else:
             return self.request_and_map(
-                "http://www.radio-browser.info/webservice/json/%s" % category,
+                "http://all.api.radio-browser.info/webservice/json/%s" % category,
                 self.mapper.as_list_of_item)
 
     def get_playable_url(self, station_id):
         try:
-            response = requests.get("http://www.radio-browser.info/webservice/json/url/%s" % station_id)
+            response = requests.get("http://all.api.radio-browser.info/webservice/json/url/%s" % station_id)
             source = response.text
             return json.loads(source)[0]["url"]
         except Exception:
